@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.12
+-- version 4.2.11
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 
--- Server version: 5.6.16
--- PHP Version: 5.5.11
+-- Generation Time: Feb 22, 2015 at 02:25 PM
+-- Server version: 5.6.21
+-- PHP Version: 5.6.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,62 +19,83 @@ SET time_zone = "+00:00";
 --
 -- Database: `rms`
 --
+CREATE DATABASE IF NOT EXISTS `rms` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `rms`;
 
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `applications`
+-- Table structure for table `applications`
 --
 
 CREATE TABLE IF NOT EXISTS `applications` (
-  `app_id` int(11) NOT NULL AUTO_INCREMENT,
-  `app_fullname` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+`app_id` int(11) NOT NULL,
+  `app_fullname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `app_shortname` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `create_dttm` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_dttm` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `delete_flag` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`app_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+  `delete_flag` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `daily_work`
+-- Table structure for table `booking`
 --
 
-CREATE TABLE IF NOT EXISTS `daily_work` (
-  `daily_id` int(11) NOT NULL AUTO_INCREMENT,
-  `ur_app_id` int(11) NOT NULL,
-  `resource_id` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `man_hour` float NOT NULL,
-  `fte` float NOT NULL,
-  `man_hour_left` float NOT NULL,
-  `status` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `booking` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`daily_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+CREATE TABLE IF NOT EXISTS `booking` (
+`bk_id` int(11) NOT NULL,
+  `app_id` int(11) NOT NULL,
+  `ur_id` int(11) NOT NULL,
+  `rs_id` int(11) NOT NULL,
+  `bk_task` int(11) NOT NULL,
+  `bk_type` int(11) NOT NULL,
+  `bk_manday` float NOT NULL,
+  `bk_fte` float NOT NULL,
+  `bk_status` int(11) NOT NULL,
+  `bk_start_dt` date NOT NULL,
+  `bk_end_dt` date NOT NULL,
+  `create_dttm` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_dttm` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `delete_flag` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `holidays`
+-- Table structure for table `booking_detail`
+--
+
+CREATE TABLE IF NOT EXISTS `booking_detail` (
+`bk_detail_id` int(11) NOT NULL,
+  `bk_id` int(11) NOT NULL,
+  `rs_id` int(11) NOT NULL,
+  `bk_detail_dt` date NOT NULL,
+  `bk_detail_manhour` float NOT NULL,
+  `bk_detail_fte` float NOT NULL,
+  `create_dttm` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_dttm` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `delete_flag` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `holidays`
 --
 
 CREATE TABLE IF NOT EXISTS `holidays` (
-  `holiday_id` int(11) NOT NULL AUTO_INCREMENT,
+`holiday_id` int(11) NOT NULL,
   `holiday_type` int(2) NOT NULL,
   `holiday_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `holiday_date` date NOT NULL,
   `create_dttm` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_dttm` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `delete_flag` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`holiday_id`),
-  UNIQUE KEY `date` (`holiday_date`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=40 ;
+  `delete_flag` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- dump ตาราง `holidays`
+-- Dumping data for table `holidays`
 --
 
 INSERT INTO `holidays` (`holiday_id`, `holiday_type`, `holiday_name`, `holiday_date`, `create_dttm`, `update_dttm`, `delete_flag`) VALUES
@@ -115,93 +136,168 @@ INSERT INTO `holidays` (`holiday_id`, `holiday_type`, `holiday_name`, `holiday_d
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `pooling`
+-- Table structure for table `pooling`
 --
 
 CREATE TABLE IF NOT EXISTS `pooling` (
-  `pool_id` int(11) NOT NULL AUTO_INCREMENT,
+`pooling_id` int(11) NOT NULL,
   `pooling_fullname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `pooling_shortname` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `create_dttm` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_dttm` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `delete_flag` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`pool_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+  `delete_flag` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `pooling_level`
+-- Table structure for table `pooling_level`
 --
 
 CREATE TABLE IF NOT EXISTS `pooling_level` (
-  `pooling_level_id` int(11) NOT NULL AUTO_INCREMENT,
-  `pooling_master` int(11) NOT NULL,
-  `pooling_child` int(11) NOT NULL,
+`pooling_lv_id` int(11) NOT NULL,
+  `pooling_lv_master` int(11) NOT NULL,
+  `pooling_lv_child` int(11) NOT NULL,
   `create_dttm` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_dttm` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `delete_flag` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`pooling_level_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `delete_flag` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `resources`
+-- Table structure for table `resources`
 --
 
 CREATE TABLE IF NOT EXISTS `resources` (
-  `resource_id` int(11) NOT NULL AUTO_INCREMENT,
-  `emp_id` int(11) NOT NULL,
-  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `last_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `nickname` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `status` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `datetime` datetime NOT NULL,
-  `pool_id` int(11) NOT NULL,
-  PRIMARY KEY (`resource_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+`rs_id` int(11) NOT NULL,
+  `pooling_id` int(11) NOT NULL,
+  `holiday_type` int(11) NOT NULL,
+  `rs_emp_id` int(11) NOT NULL,
+  `rs_firstname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `rs_lastname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `rs_nickname` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `rs_status` int(11) NOT NULL,
+  `create_dttm` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_dttm` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `delete_flag` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `ur`
+-- Table structure for table `ur`
 --
 
 CREATE TABLE IF NOT EXISTS `ur` (
-  `ur_id` int(11) NOT NULL AUTO_INCREMENT,
+`ur_id` int(11) NOT NULL,
   `ur_no` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `ur_name` text COLLATE utf8_unicode_ci NOT NULL,
-  `ur_effort` int(11) NOT NULL,
-  `start_date` date NOT NULL,
-  `end_date` date NOT NULL,
-  `datetime` datetime NOT NULL,
-  `status` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`ur_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
+  `ur_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `ur_manday` int(11) NOT NULL,
+  `ur_start_dt` date NOT NULL,
+  `ur_end_dt` date NOT NULL,
+  `ur_status` int(11) NOT NULL,
+  `create_dttm` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_dttm` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `delete_flag` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- โครงสร้างตาราง `ur_app`
+-- Indexes for dumped tables
 --
 
-CREATE TABLE IF NOT EXISTS `ur_app` (
-  `ur_app_id` int(11) NOT NULL AUTO_INCREMENT,
-  `ur_id` int(11) NOT NULL,
-  `resource_id` int(11) NOT NULL,
-  `task` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `task_effort` float NOT NULL,
-  `task_fte` float NOT NULL,
-  `status` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `start_date` date NOT NULL,
-  `end_date` date NOT NULL,
-  `datetime` datetime NOT NULL,
-  `app_id` int(11) NOT NULL,
-  `booking` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`ur_app_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+--
+-- Indexes for table `applications`
+--
+ALTER TABLE `applications`
+ ADD PRIMARY KEY (`app_id`);
 
+--
+-- Indexes for table `booking`
+--
+ALTER TABLE `booking`
+ ADD PRIMARY KEY (`bk_id`);
+
+--
+-- Indexes for table `booking_detail`
+--
+ALTER TABLE `booking_detail`
+ ADD PRIMARY KEY (`bk_detail_id`);
+
+--
+-- Indexes for table `holidays`
+--
+ALTER TABLE `holidays`
+ ADD PRIMARY KEY (`holiday_id`), ADD UNIQUE KEY `date` (`holiday_date`);
+
+--
+-- Indexes for table `pooling`
+--
+ALTER TABLE `pooling`
+ ADD PRIMARY KEY (`pooling_id`);
+
+--
+-- Indexes for table `pooling_level`
+--
+ALTER TABLE `pooling_level`
+ ADD PRIMARY KEY (`pooling_lv_id`);
+
+--
+-- Indexes for table `resources`
+--
+ALTER TABLE `resources`
+ ADD PRIMARY KEY (`rs_id`);
+
+--
+-- Indexes for table `ur`
+--
+ALTER TABLE `ur`
+ ADD PRIMARY KEY (`ur_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `applications`
+--
+ALTER TABLE `applications`
+MODIFY `app_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `booking`
+--
+ALTER TABLE `booking`
+MODIFY `bk_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `booking_detail`
+--
+ALTER TABLE `booking_detail`
+MODIFY `bk_detail_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `holidays`
+--
+ALTER TABLE `holidays`
+MODIFY `holiday_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=40;
+--
+-- AUTO_INCREMENT for table `pooling`
+--
+ALTER TABLE `pooling`
+MODIFY `pooling_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `pooling_level`
+--
+ALTER TABLE `pooling_level`
+MODIFY `pooling_lv_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `resources`
+--
+ALTER TABLE `resources`
+MODIFY `rs_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `ur`
+--
+ALTER TABLE `ur`
+MODIFY `ur_id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
