@@ -227,30 +227,30 @@
         </div>
     </div>
 
-    <div class="modal fade" id="updatePoolingModal" tabindex="-1" role="dialog" aria-labelledby="updatePoolingModalLabel" aria-hidden="true">
+    <div class="modal fade" id="updateUrModal" tabindex="-1" role="dialog" aria-labelledby="updateUrModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="updatePoolingLabel">Edit Pooling</h4>
+                    <h4 class="modal-title" id="updateUrLabel">Edit User requirement</h4>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="ur_no" class="control-label">UR No.</label>
-                            <input type="text" class="form-control" id="ur_no">
+                            <label for="update_ur_no" class="control-label">UR No.</label>
+                            <input type="text" class="form-control" id="update_ur_no">
                         </div>
                         <div class="form-group">
-                            <label for="ur_name" class="control-label">UR Name</label>
-                            <input type="text" class="form-control" id="ur_name">
+                            <label for="update_ur_name" class="control-label">UR Name</label>
+                            <input type="text" class="form-control" id="update_ur_name">
                         </div>
                         <div class="form-group">
-                            <label for="ur_manday" class="control-label">Mandays</label>
-                            <input type="text" class="form-control" id="ur_manday">
+                            <label for="update_ur_manday" class="control-label">Mandays</label>
+                            <input type="text" class="form-control" id="update_ur_manday">
                         </div>
                         <div class="form-group">
-                            <label for="ur_start_dt" class="control-label">Start date</label>
-                            <div class='input-group date' id='ur_start_dt'>
+                            <label for="update_ur_start_dt" class="control-label">Start date</label>
+                            <div class='input-group date' id='update_ur_start_dt'>
                                 <input type='text' class="form-control" />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -258,8 +258,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="ur_end_dt" class="control-label">End date</label>
-                            <div class='input-group date' id='ur_end_dt'>
+                            <label for="update_ur_end_dt" class="control-label">End date</label>
+                            <div class='input-group date' id='update_ur_end_dt'>
                                 <input type='text' class="form-control" />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -267,8 +267,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="ur_status" class="control-label">Status</label>
-                            <select class="form-control" id="ur_status">
+                            <label for="update_ur_status" class="control-label">Status</label>
+                            <select class="form-control" id="update_ur_status">
                                 <option>Initial</option>
                                 <option>In progress</option>
                                 <option>Complete</option>
@@ -285,16 +285,16 @@
         </div>
     </div>
 
-    <div class="modal fade" id="deletePoolingModal" tabindex="-1" role="dialog" aria-labelledby="deletePoolingModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteUrModal" tabindex="-1" role="dialog" aria-labelledby="deleteUrModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title text-danger" id="deletePoolingLabel">Delete Pooling</h4>
+                    <h4 class="modal-title text-danger" id="deleteUrLabel">Delete User requirement</h4>
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="text-danger">Do you want to delete <b>[Pooling Name]</b> pooling?</div>
+                        <div class="text-danger">Do you want to delete <b>[UR No.] : [UR Name]</b>?</div>
                     </form>
                 </div>
                 <div class="modal-footer">
